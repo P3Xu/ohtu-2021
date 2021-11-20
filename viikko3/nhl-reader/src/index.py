@@ -9,6 +9,7 @@ def main():
 
     for player_dict in response:
         if player_dict['nationality'] == "FIN":
+            
             player = Player(
                 player_dict['name'],
                 player_dict['team'],
@@ -17,6 +18,8 @@ def main():
             )
 
             players.append(player)
+
+    players = sorted(players, key=lambda x: x.goals+x.assists, reverse=True)
 
     for player in players:
         print(player)

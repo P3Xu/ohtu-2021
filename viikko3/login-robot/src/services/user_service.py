@@ -1,3 +1,4 @@
+import re
 from entities.user import User
 
 
@@ -37,4 +38,14 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
 
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
+        if self._user_repository.find_by_username(username):
+           raise UserInputError(f"User with username {username} already exists")
+
+        if re.match(r"^[a-z]{3,}$", username) is None:
+            raise UserInputError("Username is not valid")
+
+        if re.match(r"^(?=.*\d)(?=.*[a-z]).{8,}$", password) is None:
+            raise UserInputError("Password is not valid")
+
+        # meni tähän tehtävään sen verran paljon aikaa hukkaan että
+        # nyt ei irronnut tämän kuvaavampia virhemesuja

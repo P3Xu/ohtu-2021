@@ -17,8 +17,8 @@ class Kayttoliittyma:
         self._komennot = {
             Komento.SUMMA: Summa(sovellus, self._lue_syote),
             Komento.EROTUS: Erotus(sovellus, self._lue_syote),
-            Komento.NOLLAUS: Nollaus(sovellus, self._lue_syote),
-            Komento.KUMOA: Kumoa(sovellus, self._lue_syote),
+            Komento.NOLLAUS: Nollaus(sovellus),
+            Komento.KUMOA: Kumoa(sovellus)
         }
 
     def kaynnista(self):
@@ -82,30 +82,46 @@ class Summa:
     def __init__(self, logiikka, syote):
         self.logiikka = logiikka
         self.syote = syote
+        self.arvo = self.logiikka.tulos
 
     def suorita(self):
+        self.arvo = self.logiikka.tulos
+        self.logiikka.toiminto = self
         self.logiikka.plus(int(self.syote()))
+
+    def kumoa(self):
+        self.logiikka.tulos = self.arvo
 
 class Erotus:
     def __init__(self, logiikka, syote):
         self.logiikka = logiikka
         self.syote = syote
+        self.arvo = self.logiikka.tulos
 
     def suorita(self):
+        self.arvo = self.logiikka.tulos
+        self.logiikka.toiminto = self
         self.logiikka.miinus(int(self.syote()))
 
+    def kumoa(self):
+        self.logiikka.tulos = self.arvo
+
 class Nollaus:
-    def __init__(self, logiikka, syote):
+    def __init__(self, logiikka):
         self.logiikka = logiikka
-        self.syote = syote
+        self.arvo = self.logiikka.tulos
 
     def suorita(self):
+        self.arvo = self.logiikka.tulos
+        self.logiikka.toiminto = self
         self.logiikka.nollaa()
 
+    def kumoa(self):
+        self.logiikka.tulos = self.arvo
+
 class Kumoa:
-    def __init__(self, logiikka, syote):
+    def __init__(self, logiikka):
         self.logiikka = logiikka
-        self.syote = syote
 
     def suorita(self):
-        self.logiikka.kumoa()
+        self.logiikka.toiminto.kumoa()

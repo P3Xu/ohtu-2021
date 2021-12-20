@@ -1,5 +1,4 @@
-from KPS import KPS
-from tuomari import Tuomari
+from kps import KPS
 from tekoaly import Tekoaly
 
 

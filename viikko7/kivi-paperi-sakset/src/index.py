@@ -1,9 +1,8 @@
-from kps_pelaaja_vs_pelaaja import KPSPelaajaVsPelaaja
-from kps_tekoaly import KPSTekoaly
-from kps_parempi_tekoaly import KPSParempiTekoaly
-
+from peli import Peli
 
 def main():
+    peli = Peli()
+
     while True:
         print("Valitse pelataanko"
               "\n (a) Ihmistä vastaan"
@@ -19,21 +18,21 @@ def main():
                 "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
             )
 
-            kaksinpeli = KPSPelaajaVsPelaaja()
+            kaksinpeli = peli.aloita_kaksinpeli()
             kaksinpeli.pelaa()
         elif vastaus.endswith("b"):
             print(
                 "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
             )
 
-            yksinpeli = KPSTekoaly()
+            yksinpeli = peli.aloita_helppo_yksinpeli()
             yksinpeli.pelaa()
         elif vastaus.endswith("c"):
             print(
                 "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
             )
 
-            haastava_yksinpeli = KPSParempiTekoaly()
+            haastava_yksinpeli = peli.aloita_vaikea_yksinpeli()
             haastava_yksinpeli.pelaa()
         else:
             break

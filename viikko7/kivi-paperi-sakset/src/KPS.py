@@ -25,4 +25,4 @@ class KPS:
         return input("Ensimmäisen pelaajan siirto: ")
 
     def _tokan_siirto(self):
-        return input("Toisen pelaajan siirto: ")
+        return 0
